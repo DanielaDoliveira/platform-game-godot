@@ -1,18 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://de6um3d04eiyd"]
+[gd_scene load_steps=20 format=3 uid="uid://de6um3d04eiyd"]
 
-[ext_resource type="Script" path="res://scenes/game.gd" id="1_1q4rl"]
-[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_48ck0"]
-[ext_resource type="PackedScene" uid="uid://bcl6cknr6i4r6" path="res://scenes/player.tscn" id="1_q80vi"]
-[ext_resource type="PackedScene" uid="uid://cr3bfvty8pd6r" path="res://scenes/canvas.tscn" id="1_s0dfv"]
-[ext_resource type="Texture2D" uid="uid://qbph4nnshyxh" path="res://sprites/world_tileset.png" id="2_w8yxi"]
-[ext_resource type="PackedScene" uid="uid://djfstodnomg1u" path="res://scenes/platform.tscn" id="3_mor8c"]
-[ext_resource type="PackedScene" uid="uid://r5jlnqipltq2" path="res://scenes/coin.tscn" id="4_483y6"]
-[ext_resource type="PackedScene" uid="uid://033t2yxfnesv" path="res://scenes/killzone.tscn" id="5_fdg4c"]
-[ext_resource type="PackedScene" uid="uid://c2vbh176hlhcf" path="res://scenes/slime.tscn" id="6_11fop"]
-[ext_resource type="FontFile" uid="uid://cjbqbl3owipw4" path="res://Fonts/PixelOperator8.ttf" id="8_gw324"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_4fsui"]
+[ext_resource type="PackedScene" uid="uid://b5i2tf51d3sae" path="res://scenes/game_manager.tscn" id="2_522i2"]
+[ext_resource type="Texture2D" uid="uid://qbph4nnshyxh" path="res://sprites/world_tileset.png" id="3_82h05"]
+[ext_resource type="PackedScene" uid="uid://bcl6cknr6i4r6" path="res://scenes/player.tscn" id="4_rdyjq"]
+[ext_resource type="PackedScene" uid="uid://r5jlnqipltq2" path="res://scenes/coin.tscn" id="5_frcps"]
+[ext_resource type="PackedScene" uid="uid://djfstodnomg1u" path="res://scenes/platform.tscn" id="6_8brek"]
+[ext_resource type="PackedScene" uid="uid://033t2yxfnesv" path="res://scenes/killzone.tscn" id="7_gqubp"]
+[ext_resource type="PackedScene" uid="uid://c2vbh176hlhcf" path="res://scenes/slime.tscn" id="8_k4j6g"]
+[ext_resource type="PackedScene" uid="uid://cr3bfvty8pd6r" path="res://scenes/canvas.tscn" id="9_c5yv1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21lex"]
-texture = ExtResource("2_w8yxi")
+texture = ExtResource("3_82h05")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -249,7 +248,7 @@ _data = {
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ipyk1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tl11q"]
-atlas = ExtResource("2_w8yxi")
+atlas = ExtResource("3_82h05")
 region = Rect2(128, 64, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qxqa"]
@@ -263,14 +262,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Game" type="Node2D"]
-script = ExtResource("1_1q4rl")
+[node name="Level02" type="Node2D"]
+script = ExtResource("1_4fsui")
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="GameManager" type="Node" parent="Node2D"]
+[node name="GameManager" parent="Node2D" instance=ExtResource("2_522i2")]
 unique_name_in_owner = true
-script = ExtResource("1_48ck0")
 
 [node name="TileMap" type="TileMap" parent="Node2D"]
 position = Vector2(40, -40)
@@ -283,136 +281,137 @@ layer_1/tile_data = PackedInt32Array(458745, 0, 0, 524281, 0, 1, 589817, 0, 1, 4
 layer_2/name = "trees"
 layer_2/tile_data = PackedInt32Array(393211, 65536, 3, 393212, 65536, 6, 393213, 65536, 6, 327687, 65536, 3, 327689, 65536, 6, 196622, 65536, 5, -196593, 131072, 5, 196623, 65536, 3, 196627, 65536, 4, 196628, 65536, 6, 196629, 65536, 4, -131047, 65536, 3, -131046, 65536, 4, -131045, 65536, 5, -131044, 65536, 5, -196578, 131072, 5, 196638, 65536, 3, -196577, 131072, 5, 196639, 65536, 6, 196640, 65536, 6, -65499, 65536, 6, -65498, 65536, 6, -65497, 65536, 6, -131013, 0, 3, -65477, 0, 5, -196548, 0, 3, -131012, 0, 4, -65476, 0, 5, -130986, 65536, 6, -130985, 65536, 3)
 
-[node name="Player" parent="Node2D" instance=ExtResource("1_q80vi")]
+[node name="Player" parent="Node2D" instance=ExtResource("4_rdyjq")]
 position = Vector2(31, 17)
+scale = Vector2(1, 1.00444)
 
 [node name="Camera2D" type="Camera2D" parent="Node2D/Player"]
 position = Vector2(24, 10)
 scale = Vector2(1.05, 1.05)
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 limit_left = -80
 limit_bottom = 256
 limit_smoothed = true
 
 [node name="Coins" type="Node" parent="Node2D"]
 
-[node name="coin2" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin2" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(152, 29)
 
-[node name="coin3" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin3" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(-63, 49)
 
-[node name="coin4" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin4" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(30, 51)
 
-[node name="coin5" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin5" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(186, 35)
 
-[node name="coin6" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin6" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(49, 17)
 
-[node name="coin8" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin8" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(109, 17)
 
-[node name="coin9" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin9" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(414, 19)
 
-[node name="coin10" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin10" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(433, 19)
 
-[node name="coin11" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin11" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(452, 19)
 
-[node name="coin12" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin12" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(473, 19)
 
-[node name="coin13" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin13" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(473, 5)
 
-[node name="coin14" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin14" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(451, 5)
 
-[node name="coin15" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin15" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(433, 5)
 
-[node name="coin16" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin16" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(414, 4)
 
-[node name="coin17" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin17" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(303, -64)
 
-[node name="coin18" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin18" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(323, -64)
 
-[node name="coin19" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin19" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(349, -64)
 
-[node name="coin20" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin20" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(549, -19)
 
-[node name="coin21" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin21" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(550, 1)
 
-[node name="coin22" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin22" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(169, -31)
 
-[node name="coin23" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin23" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(185, -31)
 
-[node name="coin24" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin24" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(151, -31)
 
-[node name="coin25" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin25" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(254, -66)
 
-[node name="coin26" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin26" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1223, -54)
 
-[node name="coin27" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin27" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1275, -54)
 
-[node name="coin28" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin28" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1320, -54)
 
-[node name="coin29" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin29" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1382, -54)
 
-[node name="coin30" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin30" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1350, -75)
 
-[node name="coin31" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin31" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1293, -78)
 
-[node name="coin32" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin32" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1241, -78)
 
-[node name="coin33" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin33" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1160, -48)
 
-[node name="coin34" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin34" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(1247, -97)
 
-[node name="coin35" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin35" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(913, -45)
 
-[node name="coin36" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin36" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(715, -44)
 
-[node name="coin37" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin37" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(872, -45)
 
-[node name="coin38" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin38" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(740, -44)
 
-[node name="coin7" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin7" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(62, 17)
 
-[node name="coin" parent="Node2D/Coins" instance=ExtResource("4_483y6")]
+[node name="coin" parent="Node2D/Coins" instance=ExtResource("5_frcps")]
 position = Vector2(12, 51)
 
 [node name="Platforms" type="Node" parent="Node2D"]
 
-[node name="Platform" parent="Node2D/Platforms" instance=ExtResource("3_mor8c")]
+[node name="Platform" parent="Node2D/Platforms" instance=ExtResource("6_8brek")]
 position = Vector2(659, -23)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Platforms/Platform"]
@@ -422,7 +421,7 @@ libraries = {
 autoplay = "move_right"
 speed_scale = -1.024
 
-[node name="Platform2" parent="Node2D/Platforms" instance=ExtResource("3_mor8c")]
+[node name="Platform2" parent="Node2D/Platforms" instance=ExtResource("6_8brek")]
 position = Vector2(659, -23)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Platforms/Platform2"]
@@ -432,101 +431,24 @@ libraries = {
 autoplay = "move_up"
 speed_scale = -1.024
 
-[node name="Killzone" parent="Node2D" instance=ExtResource("5_fdg4c")]
+[node name="Killzone" parent="Node2D" instance=ExtResource("7_gqubp")]
 position = Vector2(153, 152)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Killzone"]
 shape = SubResource("WorldBoundaryShape2D_ipyk1")
 
-[node name="Slime" parent="Node2D" instance=ExtResource("6_11fop")]
+[node name="Slime" parent="Node2D" instance=ExtResource("8_k4j6g")]
 position = Vector2(534, -68)
 
-[node name="Slime2" parent="Node2D" instance=ExtResource("6_11fop")]
+[node name="Slime2" parent="Node2D" instance=ExtResource("8_k4j6g")]
 position = Vector2(432, -68)
 enemy_Speed = 5
 
-[node name="Labels" type="Node2D" parent="Node2D"]
-
-[node name="Panel" type="Panel" parent="Node2D/Labels"]
-offset_left = 46.0
-offset_top = 1.0
-offset_right = 86.0
-offset_bottom = 41.0
-scale = Vector2(1.63473, 0.379584)
-
-[node name="Label3" type="Label" parent="Node2D/Labels"]
-anchors_preset = -1
-anchor_left = -1.475
-anchor_top = 0.675
-anchor_right = -1.475
-anchor_bottom = 0.675
-offset_left = 52.0
-offset_top = 5.0
-offset_right = 152.0
-offset_bottom = 28.0
-scale = Vector2(0.600001, 0.720001)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.109804)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_gw324")
-theme_override_font_sizes/font_size = 8
-text = "SPACE to Jump"
-
-[node name="Panel2" type="Panel" parent="Node2D/Labels"]
-offset_left = -56.0
-offset_top = 4.0
-offset_right = -16.0
-offset_bottom = 44.0
-scale = Vector2(1.63473, 0.379584)
-
-[node name="Label4" type="Label" parent="Node2D/Labels"]
-anchors_preset = -1
-anchor_left = -1.475
-anchor_top = 0.675
-anchor_right = -1.475
-anchor_bottom = 0.675
-offset_left = -50.0
-offset_top = 8.0
-offset_right = 50.0
-offset_bottom = 31.0
-scale = Vector2(0.600001, 0.720001)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.109804)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_gw324")
-theme_override_font_sizes/font_size = 8
-text = "  A-> Move Left"
-
-[node name="Panel3" type="Panel" parent="Node2D/Labels"]
-offset_left = -55.0
-offset_top = 23.0
-offset_right = -15.0
-offset_bottom = 63.0
-scale = Vector2(1.63473, 0.379584)
-
-[node name="Label5" type="Label" parent="Node2D/Labels"]
-anchors_preset = -1
-anchor_left = -1.475
-anchor_top = 0.675
-anchor_right = -1.475
-anchor_bottom = 0.675
-offset_left = -49.0
-offset_top = 27.0
-offset_right = 51.0
-offset_bottom = 50.0
-scale = Vector2(0.600001, 0.720001)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.109804)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_gw324")
-theme_override_font_sizes/font_size = 8
-text = "D -> Move Right"
-
-[node name="Canvas" parent="." instance=ExtResource("1_s0dfv")]
+[node name="Canvas" parent="." instance=ExtResource("9_c5yv1")]
 unique_name_in_owner = true
-offset_left = 60.0
+offset_left = 61.0
 offset_top = -121.0
-offset_right = 60.0
+offset_right = 61.0
 offset_bottom = -121.0
 size_flags_horizontal = 6
 remaining_coins = 38

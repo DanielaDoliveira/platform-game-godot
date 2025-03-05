@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr3bfvty8pd6r"]
+[gd_scene load_steps=11 format=3 uid="uid://cr3bfvty8pd6r"]
 
 [ext_resource type="Script" path="res://scenes/canvas.gd" id="1_5g1xh"]
 [ext_resource type="FontFile" uid="uid://dhtnwb6e5xkub" path="res://Fonts/PixelOperator8-Bold.ttf" id="1_n3ski"]
 [ext_resource type="Texture2D" uid="uid://c6htnlxtjkvkp" path="res://sprites/coin_ui.png" id="2_s5i2w"]
 [ext_resource type="Script" path="res://Scripts/complete_level.gd" id="4_wd2ke"]
+[ext_resource type="StyleBox" uid="uid://byn1mqutki2e6" path="res://btnThemes/exithover.tres" id="7_ufsid"]
+[ext_resource type="StyleBox" uid="uid://b6htqu1gi626a" path="res://btnThemes/exitmenunormal.tres" id="8_wieuu"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_yfmmy"]
 
@@ -15,8 +17,17 @@ texture_margin_right = 12.0
 texture_margin_bottom = 12.0
 modulate_color = Color(0, 0, 0, 0.662745)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gbap"]
+bg_color = Color(0.890196, 0.709804, 0.0196078, 0.305882)
+expand_margin_left = 40.0
+expand_margin_top = 40.0
+expand_margin_right = 40.0
+expand_margin_bottom = 40.0
+
 [sub_resource type="SystemFont" id="SystemFont_2f4q4"]
 font_names = PackedStringArray("Impact")
+font_stretch = 200
+subpixel_positioning = 0
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -25,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 script = ExtResource("1_5g1xh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -70,11 +82,13 @@ text = "10"
 script = ExtResource("4_wd2ke")
 
 [node name="Panel" type="Panel" parent="CompleteLevel"]
-offset_left = 45.0
-offset_top = 17.0
-offset_right = 754.0
-offset_bottom = 400.0
-scale = Vector2(1.48, 1.68)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.48171, 1.68125)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6gbap")
 
 [node name="MarginContainer" type="MarginContainer" parent="CompleteLevel"]
 anchors_preset = 8
@@ -82,42 +96,119 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -354.5
+offset_top = -191.5
+offset_right = 354.5
+offset_bottom = 191.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CompleteLevel/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 32
 alignment = 1
 
 [node name="Label" type="Label" parent="CompleteLevel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_2f4q4")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 50
 text = "LEVEL COMPLETED!"
 
 [node name="Play_btn" type="Button" parent="CompleteLevel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 98.39)
+custom_minimum_size = Vector2(0, 81.23)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_n3ski")
 theme_override_font_sizes/font_size = 32
-text = "NEXT LEVEL"
+theme_override_styles/focus = ExtResource("7_ufsid")
+theme_override_styles/hover_pressed = ExtResource("7_ufsid")
+theme_override_styles/hover = ExtResource("7_ufsid")
+theme_override_styles/normal = ExtResource("8_wieuu")
+text = "NEXT  "
 
 [node name="Quit_btn" type="Button" parent="CompleteLevel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 98.39)
+visible = false
+custom_minimum_size = Vector2(0, 81.23)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_n3ski")
 theme_override_font_sizes/font_size = 32
-text = "QUIT"
+theme_override_styles/focus = ExtResource("7_ufsid")
+theme_override_styles/hover_pressed = ExtResource("7_ufsid")
+theme_override_styles/hover = ExtResource("7_ufsid")
+theme_override_styles/normal = ExtResource("8_wieuu")
+text = "QUIT  "
+
+[node name="Congratulations" type="CanvasLayer" parent="CompleteLevel"]
+visible = false
+script = ExtResource("4_wd2ke")
+
+[node name="Panel" type="Panel" parent="CompleteLevel/Congratulations"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.48171, 1.68125)
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_6gbap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CompleteLevel/Congratulations"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -354.5
+offset_top = -191.5
+offset_right = 354.5
+offset_bottom = 191.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CompleteLevel/Congratulations/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="CompleteLevel/Congratulations/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_2f4q4")
+theme_override_font_sizes/font_size = 50
+text = "Congratulations!"
+
+[node name="Label2" type="Label" parent="CompleteLevel/Congratulations/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_n3ski")
+theme_override_font_sizes/font_size = 50
+text = "You did it!"
+horizontal_alignment = 1
+
+[node name="Back_menu" type="Button" parent="CompleteLevel/Congratulations/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 98.39)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_n3ski")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = ExtResource("7_ufsid")
+theme_override_styles/hover_pressed = ExtResource("7_ufsid")
+theme_override_styles/hover = ExtResource("7_ufsid")
+theme_override_styles/normal = ExtResource("8_wieuu")
+text = "BACK TO MENU  "
 
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="pressed" from="CompleteLevel/MarginContainer/VBoxContainer/Play_btn" to="." method="_on_play_btn_pressed"]
 [connection signal="pressed" from="CompleteLevel/MarginContainer/VBoxContainer/Quit_btn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="CompleteLevel/Congratulations/MarginContainer/VBoxContainer/Back_menu" to="." method="_on_back_menu_pressed"]
